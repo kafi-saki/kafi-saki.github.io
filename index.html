@@ -1,1 +1,186 @@
-Hello Kafeel Baya
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Meal Log - Features</title>
+
+  <!-- AOS Library -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: linear-gradient(to right, #f0f4f8, #e6efff);
+      color: #333;
+      padding: 2rem;
+      background-attachment: fixed;
+      background-size: cover;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .logo {
+      width: 80px;
+      display: block;
+      margin: 0 auto 1rem;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p.subtitle {
+      font-size: 1.1rem;
+      color: #666;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      margin-bottom: 3rem;
+    }
+
+    section {
+      margin-bottom: 2rem;
+    }
+
+    h2 {
+      margin-bottom: 1rem;
+      color: #4CAF50;
+    }
+
+    ul {
+      padding-left: 1.5rem;
+    }
+
+    li {
+      margin-bottom: 0.7rem;
+      line-height: 1.6;
+    }
+
+    .main-btn {
+      display: block;
+      width: max-content;
+      margin: 2rem auto;
+      padding: 1rem 2rem;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      font-size: 1.2rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+      animation: pulse 2s infinite;
+    }
+
+    .main-btn:hover {
+      background: #388e3c;
+      transform: scale(1.05);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      color: gray;
+    }
+
+    a {
+      color: #4CAF50;
+      text-decoration: none;
+    }
+
+    img.feature-img {
+      width: 100%;
+      border-radius: 12px;
+      margin: 1.5rem 0;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .glow-text {
+      text-shadow: 0 0 8px rgba(76, 175, 80, 0.8);
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.6); }
+      70% { box-shadow: 0 0 0 12px rgba(76, 175, 80, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0); }
+    }
+
+  </style>
+</head>
+<body>
+
+  <header data-aos="fade-down">
+    <img src="https://raw.githubusercontent.com/kafi-saki/kafi-saki.github.io/main/logo.png" alt="Logo" class="logo" />
+    <h1 class="glow-text">AI Meal Log</h1>
+    <p class="subtitle">Smart daily meal tracker powered by AI</p>
+  </header>
+
+  <div class="container" data-aos="zoom-in">
+    <section data-aos="fade-up">
+      <h2 data-aos="flip-up">How to Use</h2>
+      <ul>
+        <li data-aos="fade-right">Choose manual or AI-assisted entry</li>
+        <li data-aos="fade-left">Describe your meal (e.g., Bread, Chicken)</li>
+        <li data-aos="fade-right">Enter calorie value or let AI suggest</li>
+        <li data-aos="fade-left">Total is automatically calculated</li>
+        <li data-aos="fade-up">No account needed — simple and clean</li>
+      </ul>
+    </section>
+
+    <section data-aos="zoom-out-up">
+      <h2 data-aos="flip-left">Features</h2>
+      <ul>
+        <li data-aos="fade-right">AI-powered meal suggestions using OpenRouter</li>
+        <li data-aos="fade-left">Instant calorie total summary</li>
+        <li data-aos="fade-right">Simple manual meal input mode</li>
+        <li data-aos="fade-left">Dark mode toggle</li>
+        <li data-aos="fade-up">No login or storage required</li>
+        <li data-aos="fade-down">Mobile responsive and smooth animations</li>
+      </ul>
+    </section>
+
+    <section data-aos="flip-down">
+      <h2>Visual Preview</h2>
+      <img src="https://raw.githubusercontent.com/kafi-saki/kafi-saki.github.io/main/img.png" alt="Preview Image 1" class="feature-img" data-aos="zoom-in" />
+      <img src="https://raw.githubusercontent.com/kafi-saki/kafi-saki.github.io/main/img2.png" alt="Preview Image 2" class="feature-img" data-aos="zoom-in" />
+    </section>
+
+    <button class="main-btn" onclick="window.location.href='YOUR_MEAL_LOG_LINK_HERE'" data-aos="flip-right">
+      Try the AI Meal Log
+    </button>
+  </div>
+
+  <footer data-aos="fade-up">
+    Developed by Saqib Sarwar<br/>
+    Email: <a href="mailto:saqibsarwar003@gmail.com">saqibsarwar003@gmail.com</a><br/>
+    <a href="https://www.instagram.com/technosaqib_">Instagram</a> |
+    <a href="https://youtube.com/@technosaqib1">YouTube</a>
+  </footer>
+
+  <!-- AOS Script -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1000,
+      once: true
+    });
+  </script>
+</body>
+</html>
