@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI & Programming Quiz</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 50px auto;
+      padding: 30px;
+      background-color: rgba(0, 0, 0, 0.3);
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 10px;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      width: 70%;
+      border: none;
+      border-radius: 5px;
+      margin: 15px 0;
+    }
+
+    button {
+      padding: 12px 25px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .option {
+      padding: 12px;
+      margin: 8px 0;
+      background-color: rgba(255,255,255,0.1);
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .option:hover {
+      background-color: rgba(255,255,255,0.2);
+    }
+
+    #timer {
+      font-size: 18px;
+      margin-top: 10px;
+    }
+
+    footer {
+      margin-top: 30px;
+      font-size: 0.9em;
+      opacity: 0.8;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="start-box">
+    <h1>AI & Programming Quiz</h1>
+    <p>Enter your name to begin:</p>
+    <input type="text" id="username" placeholder="Your Name" />
+    <br/>
+    <button onclick="startQuiz()">Start Quiz</button>
+  </div>
+
+  <div class="container" id="quiz-box" style="display:none;">
+    <h2 id="question-text">Question Text</h2>
+    <div id="options"></div>
+    <div id="timer">Time left: 15s</div>
+    <br/>
+    <button onclick="skipQuestion()">Skip</button>
+  </div>
+
+  <div class="container" id="result-box" style="display:none;">
+    <h2 id="result-text"></h2>
+    <button onclick="restartQuiz()">Retry</button>
+  </div>
+
+  <footer>
+    Developed by <strong>Saqib Sarwar</strong>
+  </footer>
+
+  <script>
+    const questions = [
+      {
+        question: "What is Machine Learning?",
+        options: [
+          "A type of human learning",
+          "Programming without logic",
+          "Giving machines the ability to learn from data",
+          "Machines creating new hardware"
+        ],
+        answer: 2
+      },
+      {
+        question: "Which language is best known for AI development?",
+        options: ["C++", "Python", "HTML", "SQL"],
+        answer: 1
+      },
+      {
+        question: "What does 'HTML' stand for?",
+        options: [
+          "HyperText Markup Language",
+          "HighText Machine Language",
+          "Hyperloop Text Machine Learning",
+          "None of the above"
+        ],
+        answer: 0
+      },
+      {
+        question: "Which algorithm is commonly used in AI?",
+        options: ["Binary Search", "Naive Bayes", "Merge Sort", "Dijkstra's"],
+        answer: 1
+      },
+      {
+        question: "What does an 'if' statement do in programming?",
+        options: [
+          "Repeats a loop",
+          "Tests a condition",
+          "Defines a variable",
+          "Prints output"
+        ],
+        answer: 1
+      },
+      {
+        question: "Which is a valid Python data type?",
+        options: ["Tree", "Int", "Table", "Chart"],
+        answer: 1
+      },
+      {
+        question: "What does 'AI' stand for?",
+        options: [
+          "Advanced Innovation",
+          "Automated Interface",
+          "Artificial Intelligence",
+          "Auto Integration"
+        ],
+        answer: 2
+      },
+      {
+        question: "Which company created TensorFlow?",
+        options: ["Amazon", "Google", "Facebook", "Apple"],
+        answer: 1
+      },
+      {
+        question: "What does 'const' mean in JavaScript?",
+        options: [
+          "A loop",
+          "A variable that can change",
+          "A constant value that cannot change",
+          "A function"
+        ],
+        answer: 2
+      },
+      {
+        question: "Which of these is a Python library for AI?",
+        options: ["NumPy", "React", "Laravel", "Bootstrap"],
+        answer: 0
+      },
+      {
+        question: "Which of these is NOT a programming language?",
+        options: ["Java", "C++", "Python", "Google"],
+        answer: 3
+      },
+      {
+        question: "What is the use of Git?",
+        options: [
+          "Cloud storage",
+          "Version control",
+          "Graphics rendering",
+          "Server hosting"
+        ],
+        answer: 1
+      },
+      {
+        question: "What does CSS stand for?",
+        options: [
+          "Colorful Style Sheet",
+          "Creative Styling System",
+          "Cascading Style Sheets",
+          "Central Style Service"
+        ],
+        answer: 2
+      },
+      {
+        question: "Which HTML tag is used to define a hyperlink?",
+        options: ["<hyper>", "<link>", "<a>", "<href>"],
+        answer: 2
+      },
+      {
+        question: "Which language runs in a browser?",
+        options: ["Python", "Java", "C#", "JavaScript"],
+        answer: 3
+      }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+    let timer;
+    let timeLeft = 15;
+    let userName = "";
+
+    function startQuiz() {
+      const nameInput = document.getElementById("username").value.trim();
+      if (nameInput === "") {
+        alert("Please enter your name.");
+        return;
+      }
+      userName = nameInput;
+      document.getElementById("start-box").style.display = "none";
+      document.getElementById("quiz-box").style.display = "block";
+      loadQuestion();
+    }
+
+    function loadQuestion() {
+      if (currentQuestion >= questions.length) {
+        showResult();
+        return;
+      }
+
+      document.getElementById("question-text").innerText =
+        `${currentQuestion + 1}. ${questions[currentQuestion].question}`;
+      const optionsDiv = document.getElementById("options");
+      optionsDiv.innerHTML = "";
+
+      questions[currentQuestion].options.forEach((opt, i) => {
+        const btn = document.createElement("div");
+        btn.className = "option";
+        btn.innerText = opt;
+        btn.onclick = () => selectOption(i);
+        optionsDiv.appendChild(btn);
+      });
+
+      resetTimer();
+    }
+
+    function selectOption(selected) {
+      clearInterval(timer);
+      if (selected === questions[currentQuestion].answer) {
+        score++;
+      }
+      currentQuestion++;
+      setTimeout(loadQuestion, 300);
+    }
+
+    function skipQuestion() {
+      clearInterval(timer);
+      currentQuestion++;
+      setTimeout(loadQuestion, 300);
+    }
+
+    function showResult() {
+      document.getElementById("quiz-box").style.display = "none";
+      document.getElementById("result-box").style.display = "block";
+      document.getElementById("result-text").innerText =
+        `${userName}, you scored ${score} out of ${questions.length}!`;
+    }
+
+    function restartQuiz() {
+      currentQuestion = 0;
+      score = 0;
+      timeLeft = 15;
+      document.getElementById("result-box").style.display = "none";
+      document.getElementById("quiz-box").style.display = "block";
+      loadQuestion();
+    }
+
+    function resetTimer() {
+      clearInterval(timer);
+      timeLeft = 15;
+      document.getElementById("timer").innerText = `Time left: ${timeLeft}s`;
+      timer = setInterval(() => {
+        timeLeft--;
+        document.getElementById("timer").innerText = `Time left: ${timeLeft}s`;
+        if (timeLeft <= 0) {
+          clearInterval(timer);
+          skipQuestion();
+        }
+      }, 1000);
+    }
+  </script>
+</body>
+</html>
