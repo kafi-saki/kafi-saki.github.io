@@ -1,186 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AI Meal Log - Features</title>
-
-  <!-- AOS Library -->
-  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI & Programming Quiz</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
     body {
-      font-family: "Segoe UI", sans-serif;
-      background: linear-gradient(to right, #f0f4f8, #e6efff);
-      color: #333;
-      padding: 2rem;
-      background-attachment: fixed;
-      background-size: cover;
-      transition: background 0.3s, color 0.3s;
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+      background-size: 400% 400%;
+      animation: gradientFlow 15s ease infinite;
+      color: white;
+      text-align: center;
     }
 
-    .logo {
-      width: 80px;
-      display: block;
-      margin: 0 auto 1rem;
+    @keyframes gradientFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     header {
-      text-align: center;
-      margin-bottom: 2rem;
+      padding: 60px 20px 20px;
     }
 
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
+    header h1 {
+      font-size: 3em;
+      margin: 0;
+      animation: fadeIn 1.5s ease;
     }
 
-    p.subtitle {
-      font-size: 1.1rem;
-      color: #666;
+    .about {
+      max-width: 800px;
+      margin: 40px auto;
+      font-size: 1.2em;
+      padding: 0 20px;
+      animation: slideUp 1s ease;
     }
 
-    .container {
-      max-width: 900px;
-      margin: auto;
-      background: white;
-      border-radius: 16px;
-      padding: 2rem;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-      margin-bottom: 3rem;
+    .button-container {
+      margin: 60px 0;
+      animation: zoomIn 1.2s ease;
     }
 
-    section {
-      margin-bottom: 2rem;
-    }
-
-    h2 {
-      margin-bottom: 1rem;
-      color: #4CAF50;
-    }
-
-    ul {
-      padding-left: 1.5rem;
-    }
-
-    li {
-      margin-bottom: 0.7rem;
-      line-height: 1.6;
-    }
-
-    .main-btn {
-      display: block;
-      width: max-content;
-      margin: 2rem auto;
-      padding: 1rem 2rem;
-      background: #4CAF50;
-      color: white;
+    .start-btn {
+      padding: 20px 40px;
+      font-size: 1.2em;
+      background: #00c6ff;
+      background: linear-gradient(90deg, #00c6ff, #0072ff);
       border: none;
-      font-size: 1.2rem;
-      border-radius: 8px;
+      border-radius: 12px;
+      color: white;
       cursor: pointer;
-      transition: background 0.3s, transform 0.3s;
-      animation: pulse 2s infinite;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+      transition: transform 0.3s ease, background 0.3s ease;
     }
 
-    .main-btn:hover {
-      background: #388e3c;
-      transform: scale(1.05);
+    .start-btn:hover {
+      transform: scale(1.1);
+      background: linear-gradient(90deg, #0072ff, #00c6ff);
     }
 
     footer {
-      text-align: center;
-      margin-top: 3rem;
-      font-size: 0.9rem;
-      color: gray;
+      padding: 40px 20px;
+      font-size: 1em;
+      opacity: 0.9;
     }
 
-    a {
-      color: #4CAF50;
-      text-decoration: none;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    img.feature-img {
-      width: 100%;
-      border-radius: 12px;
-      margin: 1.5rem 0;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    .glow-text {
-      text-shadow: 0 0 8px rgba(76, 175, 80, 0.8);
+    @keyframes zoomIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
     }
-
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.6); }
-      70% { box-shadow: 0 0 0 12px rgba(76, 175, 80, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0); }
-    }
-
   </style>
 </head>
 <body>
 
-  <header data-aos="fade-down">
-    <img src="https://raw.githubusercontent.com/kafi-saki/kafi-saki.github.io/main/logo.png" alt="Logo" class="logo" />
-    <h1 class="glow-text">AI Meal Log</h1>
-    <p class="subtitle">Smart daily meal tracker powered by AI</p>
+  <header>
+    <h1>AI & Programming Quiz</h1>
   </header>
 
-  <div class="container" data-aos="zoom-in">
-    <section data-aos="fade-up">
-      <h2 data-aos="flip-up">How to Use</h2>
-      <ul>
-        <li data-aos="fade-right">Choose manual or AI-assisted entry</li>
-        <li data-aos="fade-left">Describe your meal (e.g., Bread, Chicken)</li>
-        <li data-aos="fade-right">Enter calorie value or let AI suggest</li>
-        <li data-aos="fade-left">Total is automatically calculated</li>
-        <li data-aos="fade-up">No account needed — simple and clean</li>
-      </ul>
-    </section>
+  <section class="about">
+    <p>
+      Welcome to the <strong>AI & Programming Quiz</strong> — a fun and interactive way to test your knowledge in artificial intelligence, programming languages, and development tools. Whether you're a beginner or an experienced coder, this quiz will challenge and sharpen your skills.
+    </p>
+    <p>
+      There are 15 real questions selected from common AI and coding concepts. Time is limited, and you can skip questions too. Are you ready to test your skills?
+    </p>
+  </section>
 
-    <section data-aos="zoom-out-up">
-      <h2 data-aos="flip-left">Features</h2>
-      <ul>
-        <li data-aos="fade-right">AI-powered meal suggestions using OpenRouter</li>
-        <li data-aos="fade-left">Instant calorie total summary</li>
-        <li data-aos="fade-right">Simple manual meal input mode</li>
-        <li data-aos="fade-left">Dark mode toggle</li>
-        <li data-aos="fade-up">No login or storage required</li>
-        <li data-aos="fade-down">Mobile responsive and smooth animations</li>
-      </ul>
-    </section>
-
-    <section data-aos="flip-down">
-      <h2>Visual Preview</h2>
-      <img src="https://raw.githubusercontent.com/kafi-saki/kafi-saki.github.io/main/img.png" alt="Preview Image 1" class="feature-img" data-aos="zoom-in" />
-      <img src="https://raw.githubusercontent.com/kafi-saki/kafi-saki.github.io/main/img2.png" alt="Preview Image 2" class="feature-img" data-aos="zoom-in" />
-    </section>
-
-    <button class="main-btn" onclick="window.location.href='https://kafi-saki.github.io/meal-log.html'" data-aos="flip-right">
-      Try the AI Meal Log
-    </button>
+  <div class="button-container">
+    <a href="https://kafi-saki.github.io/quiz" target="_blank">
+      <button class="start-btn">Start the Quiz</button>
+    </a>
   </div>
 
-  <footer data-aos="fade-up">
-    Developed by Saqib Sarwar<br/>
-    Email: <a href="mailto:saqibsarwar003@gmail.com">saqibsarwar003@gmail.com</a><br/>
-    <a href="https://www.instagram.com/technosaqib_">Instagram</a> |
-    <a href="https://youtube.com/@technosaqib1">YouTube</a>
+  <footer>
+    Developed by <strong>Saqib Sarwar</strong>
   </footer>
 
-  <!-- AOS Script -->
-  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-  <script>
-    AOS.init({
-      duration: 1000,
-      once: true
-    });
-  </script>
 </body>
 </html>
