@@ -190,7 +190,6 @@
             height: 250px;
             overflow: hidden;
             position: relative;
-            background-color: #e0e0e0; /* Fallback for broken images */
         }
 
         .book-cover img {
@@ -248,7 +247,7 @@
         }
 
         .book-author {
-            /* color: var(--secondary-color); */ /* Use default text color for better contrast in dark mode */
+            color: var(--secondary-color);
             font-weight: 500;
             margin-bottom: 0.5rem;
         }
@@ -267,30 +266,8 @@
         .book-description {
             font-size: 0.9rem;
             line-height: 1.6;
-            /* margin-top: auto; */ /* Removed to allow Read Book button to flow naturally */
-            margin-bottom: 1rem; /* Added space before button */
+            margin-top: auto;
         }
-        
-        .book-info .read-book-btn {
-            display: inline-block;
-            margin-top: auto; /* Pushes button to the bottom */
-            padding: 0.6rem 1.2rem;
-            background-color: var(--accent-color);
-            color: var(--light-text);
-            text-decoration: none;
-            border-radius: 4px;
-            text-align: center;
-            font-weight: 500;
-            transition: background-color 0.3s;
-            border: none;
-            cursor: pointer;
-            align-self: flex-start; /* Align button to the start if content is short */
-        }
-
-        .book-info .read-book-btn:hover {
-            background-color: var(--secondary-color);
-        }
-
 
         .no-books {
             text-align: center;
@@ -435,8 +412,7 @@
                 author: "Harper Lee",
                 genre: "Fiction",
                 description: "A powerful story of race, class, justice, and childhood innocence set in a small Southern town during the Depression.",
-                cover: "https://images.app.goo.gl/q9oSC",
-                bookLink: "https://www.raio.org/TKMFullText.pdf",
+                cover: "/api/placeholder/400/600",
                 isFavorite: false
             },
             {
@@ -445,8 +421,7 @@
                 author: "George Orwell",
                 genre: "Dystopian",
                 description: "A chilling portrait of a totalitarian society where government surveillance, propaganda, and control are absolute.",
-                cover: "https://images.app.goo.gl/vFz1w",
-                bookLink: "https://archive.org/details/1984_thegraphicnovel",
+                cover: "/api/placeholder/400/600",
                 isFavorite: false
             },
             {
@@ -455,8 +430,7 @@
                 author: "F. Scott Fitzgerald",
                 genre: "Classic",
                 description: "The story of wealthy Jay Gatsby and his love for Daisy Buchanan, capturing the essence of the Jazz Age.",
-                cover: "https://images.app.goo.gl/73s13",
-                bookLink: "https://www.planetebook.com/free-ebooks/the-great-gatsby.pdf",
+                cover: "/api/placeholder/400/600",
                 isFavorite: false
             },
             {
@@ -465,8 +439,7 @@
                 author: "J.K. Rowling",
                 genre: "Fantasy",
                 description: "The first adventure of the young wizard Harry Potter as he discovers his magical heritage and begins his education at Hogwarts.",
-                cover: "https://images.app.goo.gl/EJb2T",
-                bookLink: "https://kvongcmehsanalibrary.wordpress.com/wp-content/uploads/2021/07/harrypotter.pdf",
+                cover: "/api/placeholder/400/600",
                 isFavorite: false
             },
             {
@@ -475,8 +448,7 @@
                 author: "J.R.R. Tolkien",
                 genre: "Fantasy",
                 description: "The story of Bilbo Baggins, a hobbit who embarks on an unexpected journey to reclaim the treasure guarded by the dragon Smaug.",
-                cover: "https://images.app.goo.gl/3qvtu",
-                bookLink: "https://www.gobowenschool.co.uk/the-hobbit-pdf-book/",
+                cover: "/api/placeholder/400/600",
                 isFavorite: false
             },
             {
@@ -485,8 +457,7 @@
                 author: "Frank Herbert",
                 genre: "Science Fiction",
                 description: "A complex blend of politics, religion, ecology, and human emotion set on the desert planet Arrakis.",
-                cover: "https://images.app.goo.gl/qqZD8",
-                bookLink: "https://loja.ipt.br/HomePages/libweb/470781/DuneByFrankHerbertHerbertFrank.pdf",
+                cover: "/api/placeholder/400/600",
                 isFavorite: false
             },
             {
@@ -495,8 +466,7 @@
                 author: "Jane Austen",
                 genre: "Romance",
                 description: "The story of Elizabeth Bennet, her complicated relationship with Mr. Darcy, and the world of the English landed gentry at the turn of the 19th century.",
-                cover: "https://images.app.goo.gl/5HmRh",
-                bookLink: "https://giove.isti.cnr.it/demo/eread/Libri/joy/Pride.pdf",
+                cover: "/api/placeholder/400/600",
                 isFavorite: false
             },
             {
@@ -505,8 +475,7 @@
                 author: "J.D. Salinger",
                 genre: "Fiction",
                 description: "The story of Holden Caulfield, a teenager who recounts his experiences in New York City after being expelled from prep school.",
-                cover: "https://images.app.goo.gl/iveHf",
-                bookLink: "https://giove.isti.cnr.it/demo/eread/Libri/sad/Rye.pdf",
+                cover: "/api/placeholder/400/600",
                 isFavorite: false
             },
             {
@@ -515,8 +484,7 @@
                 author: "Suzanne Collins",
                 genre: "Dystopian",
                 description: "In a dystopian future, teenagers are forced to fight to the death in an annual televised battle called the Hunger Games.",
-                cover: "https://teachingbooks.com/content/ingram_images_hi/3/0439023483.jpg", // Extracted direct link
-                bookLink: "https://mcla7th.weebly.com/uploads/1/4/0/8/14084007/hunger-games-18.pdf",
+                cover: "/api/placeholder/400/600",
                 isFavorite: false
             },
             {
@@ -525,8 +493,7 @@
                 author: "Yuval Noah Harari",
                 genre: "Non-fiction",
                 description: "A thought-provoking exploration of the history of Homo sapiens, from ancient times to the present day.",
-                cover: "https://images.app.goo.gl/rqNto",
-                bookLink: "https://archive.org/details/sbrief",
+                cover: "/api/placeholder/400/600",
                 isFavorite: false
             },
             {
@@ -535,8 +502,7 @@
                 author: "Paulo Coelho",
                 genre: "Fiction",
                 description: "A fable about following your dreams and listening to your heart, centered around a young Andalusian shepherd named Santiago.",
-                cover: "https://images.app.goo.gl/ihzYK",
-                bookLink: "https://icrrd.com/public/media/15-05-2021-084550The-Alchemist-Paulo-Coelho.pdf",
+                cover: "/api/placeholder/400/600",
                 isFavorite: false
             },
             {
@@ -545,8 +511,7 @@
                 author: "J.R.R. Tolkien",
                 genre: "Fantasy",
                 description: "An epic high-fantasy story of the quest to destroy the One Ring and defeat the Dark Lord Sauron.",
-                cover: "https://images.app.goo.gl/UGmse",
-                bookLink: "https://gosafir.com/mag/wp-content/uploads/2019/12/Tolkien-J.-The-lord-of-the-rings-HarperCollins-ebooks-2010.pdf",
+                cover: "/api/placeholder/400/600",
                 isFavorite: false
             },
             {
@@ -555,8 +520,7 @@
                 author: "Dan Brown",
                 genre: "Mystery",
                 description: "A thrilling mystery that follows symbologist Robert Langdon as he investigates a murder in the Louvre Museum.",
-                cover: "https://images.app.goo.gl/XEkGY",
-                bookLink: "https://files.hostgator.co.in/hostgator253199/file/thedavincicode-danbrown.pdf",
+                cover: "/api/placeholder/400/600",
                 isFavorite: false
             },
             {
@@ -565,8 +529,7 @@
                 author: "John Green",
                 genre: "Romance",
                 description: "A heart-wrenching love story about two teenagers with cancer who meet at a support group.",
-                cover: "https://images.app.goo.gl/pSC1p",
-                bookLink: "https://spensabayalibrary.files.wordpress.com/2016/04/the-fault-in-our-stars.pdf",
+                cover: "/api/placeholder/400/600",
                 isFavorite: false
             },
             {
@@ -575,8 +538,7 @@
                 author: "Cormac McCarthy",
                 genre: "Dystopian",
                 description: "A father and son's journey through post-apocalyptic America, fighting for survival in a world devoid of civilization.",
-                cover: "https://images.app.goo.gl/WyzNX",
-                bookLink: "https://mrsfieldstchs.weebly.com/uploads/3/7/7/1/37719247/the_road_-_text.pdf",
+                cover: "/api/placeholder/400/600",
                 isFavorite: false
             },
             {
@@ -585,4 +547,62 @@
                 author: "Daniel Kahneman",
                 genre: "Non-fiction",
                 description: "An exploration of the two systems that drive the way we think—System 1 is fast, intuitive, and emotional; System 2 is slower, more deliberative, and more logical.",
-                cover: "h
+                cover: "/api/placeholder/400/600",
+                isFavorite: false
+            },
+            {
+                id: 17,
+                title: "Foundation",
+                author: "Isaac Asimov",
+                genre: "Science Fiction",
+                description: "Set in the far future, a psychohistorian predicts the fall of the Galactic Empire and sets a plan in motion to minimize the dark age that will follow.",
+                cover: "/api/placeholder/400/600",
+                isFavorite: false
+            },
+            {
+                id: 18,
+                title: "Meditations",
+                author: "Marcus Aurelius",
+                genre: "Philosophy",
+                description: "A series of personal writings by the Roman Emperor Marcus Aurelius, recording his private notes to himself and ideas on Stoic philosophy.",
+                cover: "/api/placeholder/400/600",
+                isFavorite: false
+            },
+            {
+                id: 19,
+                title: "The Power of Now",
+                author: "Eckhart Tolle",
+                genre: "Self-Help",
+                description: "A guide to spiritual enlightenment, focusing on living in the present moment and avoiding thoughts of the past or future.",
+                cover: "/api/placeholder/400/600",
+                isFavorite: false
+            },
+            {
+                id: 20,
+                title: "Neuromancer",
+                author: "William Gibson",
+                genre: "Science Fiction",
+                description: "A groundbreaking cyberpunk novel that follows a washed-up computer hacker hired for one last job.",
+                cover: "/api/placeholder/400/600",
+                isFavorite: false
+            }
+        ];
+
+        // DOM elements
+        const bookGrid = document.getElementById('book-grid');
+        const searchInput = document.getElementById('search');
+        const genreFilter = document.getElementById('genre-filter');
+        const favoritesToggle = document.getElementById('favorites-toggle');
+        const themeToggle = document.getElementById('theme-toggle');
+        const sortSelect = document.getElementById('sort-select');
+        const paginationContainer = document.getElementById('pagination');
+
+        // Pagination settings
+        const booksPerPage = 8;
+        let currentPage = 1;
+
+        // Theme toggle functionality
+        themeToggle.addEventListener('click', () => {
+            const isDarkMode = document.body.classList.toggle('dark-theme');
+            if (isDarkMode) {
+                themeToggle.innerHTML
