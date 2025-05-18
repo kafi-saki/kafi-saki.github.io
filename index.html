@@ -1,113 +1,588 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AI & Programming Quiz</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
-      background-size: 400% 400%;
-      animation: gradientFlow 15s ease infinite;
-      color: white;
-      text-align: center;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Book List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4a6fa5;
+            --secondary-color: #166088;
+            --accent-color: #4fc3f7;
+            --light-bg: #f5f7fa;
+            --dark-bg: #2c3e50;
+            --light-text: #f5f7fa;
+            --dark-text: #333;
+            --card-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
 
-    @keyframes gradientFlow {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+        .light-theme {
+            --bg-color: var(--light-bg);
+            --text-color: var(--dark-text);
+            --card-bg: #ffffff;
+            --input-bg: #ffffff;
+            --border-color: #ddd;
+        }
 
-    header {
-      padding: 60px 20px 20px;
-    }
+        .dark-theme {
+            --bg-color: var(--dark-bg);
+            --text-color: var(--light-text);
+            --card-bg: #34495e;
+            --input-bg: #2c3e50;
+            --border-color: #4a6fa5;
+        }
 
-    header h1 {
-      font-size: 3em;
-      margin: 0;
-      animation: fadeIn 1.5s ease;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: var(--transition);
+        }
 
-    .about {
-      max-width: 800px;
-      margin: 40px auto;
-      font-size: 1.2em;
-      padding: 0 20px;
-      animation: slideUp 1s ease;
-    }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
 
-    .button-container {
-      margin: 60px 0;
-      animation: zoomIn 1.2s ease;
-    }
+        header {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
 
-    .start-btn {
-      padding: 20px 40px;
-      font-size: 1.2em;
-      background: #00c6ff;
-      background: linear-gradient(90deg, #00c6ff, #0072ff);
-      border: none;
-      border-radius: 12px;
-      color: white;
-      cursor: pointer;
-      box-shadow: 0 0 20px rgba(0,0,0,0.4);
-      transition: transform 0.3s ease, background 0.3s ease;
-    }
+        h1 {
+            margin-bottom: 0.5rem;
+            font-size: 2.5rem;
+        }
 
-    .start-btn:hover {
-      transform: scale(1.1);
-      background: linear-gradient(90deg, #0072ff, #00c6ff);
-    }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
 
-    footer {
-      padding: 40px 20px;
-      font-size: 1em;
-      opacity: 0.9;
-    }
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+        }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+        .search-container, .filter-container {
+            flex: 1;
+            min-width: 200px;
+        }
 
-    @keyframes slideUp {
-      from { opacity: 0; transform: translateY(40px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
 
-    @keyframes zoomIn {
-      from { opacity: 0; transform: scale(0.8); }
-      to { opacity: 1; transform: scale(1); }
-    }
-  </style>
+        input, select, button {
+            padding: 0.75rem;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            background-color: var(--input-bg);
+            color: var(--text-color);
+            width: 100%;
+            font-size: 1rem;
+        }
+
+        button {
+            background-color: var(--secondary-color);
+            color: var(--light-text);
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        button:hover {
+            background-color: var(--primary-color);
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--accent-color);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        .toggle-label {
+            margin-left: 0.5rem;
+        }
+
+        .book-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .book-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .book-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .book-cover {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+            background-color: #e0e0e0; /* Fallback for broken images */
+        }
+
+        .book-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .book-card:hover .book-cover img {
+            transform: scale(1.05);
+        }
+
+        .favorite-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            border: none;
+            font-size: 1.2rem;
+        }
+
+        .favorite-btn:hover {
+            transform: scale(1.2);
+        }
+
+        .favorite-btn i {
+            color: #888;
+            transition: color 0.3s ease;
+        }
+
+        .favorite-btn.active i {
+            color: #ff6b6b;
+        }
+
+        .book-info {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .book-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .book-author {
+            /* color: var(--secondary-color); */ /* Use default text color for better contrast in dark mode */
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .book-genre {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+            align-self: flex-start;
+        }
+
+        .book-description {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            /* margin-top: auto; */ /* Removed to allow Read Book button to flow naturally */
+            margin-bottom: 1rem; /* Added space before button */
+        }
+        
+        .book-info .read-book-btn {
+            display: inline-block;
+            margin-top: auto; /* Pushes button to the bottom */
+            padding: 0.6rem 1.2rem;
+            background-color: var(--accent-color);
+            color: var(--light-text);
+            text-decoration: none;
+            border-radius: 4px;
+            text-align: center;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+            align-self: flex-start; /* Align button to the start if content is short */
+        }
+
+        .book-info .read-book-btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+
+        .no-books {
+            text-align: center;
+            grid-column: 1 / -1;
+            padding: 3rem;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+            background-color: var(--primary-color);
+            color: var(--light-text);
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+            gap: 0.5rem;
+        }
+
+        .pagination button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pagination button.active {
+            background-color: var(--accent-color);
+        }
+
+        .sort-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .sort-container label {
+            white-space: nowrap;
+        }
+
+        @media (max-width: 768px) {
+            .controls {
+                flex-direction: column;
+            }
+            
+            .pagination {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
 </head>
-<body>
+<body class="light-theme">
+    <header>
+        <h1>Book List</h1>
+        <p>Discover your next favorite read</p>
+    </header>
 
-  <header>
-    <h1>AI & Programming Quiz</h1>
-  </header>
+    <div class="container">
+        <div class="controls">
+            <div class="search-container">
+                <input type="text" id="search" placeholder="Search by title or author...">
+            </div>
+            
+            <div class="filter-container">
+                <select id="genre-filter">
+                    <option value="all">All Genres</option>
+                    <option value="Fantasy">Fantasy</option>
+                    <option value="Science Fiction">Science Fiction</option>
+                    <option value="Fiction">Fiction</option>
+                    <option value="Dystopian">Dystopian</option>
+                    <option value="Classic">Classic</option>
+                    <option value="Mystery">Mystery</option>
+                    <option value="Romance">Romance</option>
+                    <option value="Non-fiction">Non-fiction</option>
+                    <option value="Self-Help">Self-Help</option>
+                    <option value="Philosophy">Philosophy</option>
+                </select>
+            </div>
+            
+            <div class="sort-container">
+                <label for="sort-select">Sort by:</label>
+                <select id="sort-select">
+                    <option value="title">Title</option>
+                    <option value="author">Author</option>
+                </select>
+            </div>
+            
+            <div class="toggle-container">
+                <label class="switch">
+                    <input type="checkbox" id="favorites-toggle">
+                    <span class="slider"></span>
+                </label>
+                <span class="toggle-label">Show Favorites Only</span>
+            </div>
+            
+            <div class="toggle-container">
+                <button id="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                    <span>Dark Mode</span>
+                </button>
+            </div>
+        </div>
 
-  <section class="about">
-    <p>
-      Welcome to the <strong>AI & Programming Quiz</strong> — a fun and interactive way to test your knowledge in artificial intelligence, programming languages, and development tools. Whether you're a beginner or an experienced coder, this quiz will challenge and sharpen your skills.
-    </p>
-    <p>
-      There are 15 real questions selected from common AI and coding concepts. Time is limited, and you can skip questions too. Are you ready to test your skills?
-    </p>
-  </section>
+        <div class="book-grid" id="book-grid">
+            <!-- Books will be populated here via JavaScript -->
+        </div>
+        
+        <div class="pagination" id="pagination">
+            <!-- Pagination will be generated here -->
+        </div>
+    </div>
 
-  <div class="button-container">
-    <a href="https://kafi-saki.github.io/quiz" target="_blank">
-      <button class="start-btn">Start the Quiz</button>
-    </a>
-  </div>
+    <footer>
+        <p>© 2025 Interactive Book List | Created with ❤️ for book lovers</p>
+    </footer>
 
-  <footer>
-    Developed by <strong>Saqib Sarwar</strong>
-  </footer>
-
-</body>
-</html>
+    <script>
+        // Book data
+        const books = [
+            {
+                id: 1,
+                title: "To Kill a Mockingbird",
+                author: "Harper Lee",
+                genre: "Fiction",
+                description: "A powerful story of race, class, justice, and childhood innocence set in a small Southern town during the Depression.",
+                cover: "https://images.app.goo.gl/q9oSC",
+                bookLink: "https://www.raio.org/TKMFullText.pdf",
+                isFavorite: false
+            },
+            {
+                id: 2,
+                title: "1984",
+                author: "George Orwell",
+                genre: "Dystopian",
+                description: "A chilling portrait of a totalitarian society where government surveillance, propaganda, and control are absolute.",
+                cover: "https://images.app.goo.gl/vFz1w",
+                bookLink: "https://archive.org/details/1984_thegraphicnovel",
+                isFavorite: false
+            },
+            {
+                id: 3,
+                title: "The Great Gatsby",
+                author: "F. Scott Fitzgerald",
+                genre: "Classic",
+                description: "The story of wealthy Jay Gatsby and his love for Daisy Buchanan, capturing the essence of the Jazz Age.",
+                cover: "https://images.app.goo.gl/73s13",
+                bookLink: "https://www.planetebook.com/free-ebooks/the-great-gatsby.pdf",
+                isFavorite: false
+            },
+            {
+                id: 4,
+                title: "Harry Potter and the Sorcerer's Stone",
+                author: "J.K. Rowling",
+                genre: "Fantasy",
+                description: "The first adventure of the young wizard Harry Potter as he discovers his magical heritage and begins his education at Hogwarts.",
+                cover: "https://images.app.goo.gl/EJb2T",
+                bookLink: "https://kvongcmehsanalibrary.wordpress.com/wp-content/uploads/2021/07/harrypotter.pdf",
+                isFavorite: false
+            },
+            {
+                id: 5,
+                title: "The Hobbit",
+                author: "J.R.R. Tolkien",
+                genre: "Fantasy",
+                description: "The story of Bilbo Baggins, a hobbit who embarks on an unexpected journey to reclaim the treasure guarded by the dragon Smaug.",
+                cover: "https://images.app.goo.gl/3qvtu",
+                bookLink: "https://www.gobowenschool.co.uk/the-hobbit-pdf-book/",
+                isFavorite: false
+            },
+            {
+                id: 6,
+                title: "Dune",
+                author: "Frank Herbert",
+                genre: "Science Fiction",
+                description: "A complex blend of politics, religion, ecology, and human emotion set on the desert planet Arrakis.",
+                cover: "https://images.app.goo.gl/qqZD8",
+                bookLink: "https://loja.ipt.br/HomePages/libweb/470781/DuneByFrankHerbertHerbertFrank.pdf",
+                isFavorite: false
+            },
+            {
+                id: 7,
+                title: "Pride and Prejudice",
+                author: "Jane Austen",
+                genre: "Romance",
+                description: "The story of Elizabeth Bennet, her complicated relationship with Mr. Darcy, and the world of the English landed gentry at the turn of the 19th century.",
+                cover: "https://images.app.goo.gl/5HmRh",
+                bookLink: "https://giove.isti.cnr.it/demo/eread/Libri/joy/Pride.pdf",
+                isFavorite: false
+            },
+            {
+                id: 8,
+                title: "The Catcher in the Rye",
+                author: "J.D. Salinger",
+                genre: "Fiction",
+                description: "The story of Holden Caulfield, a teenager who recounts his experiences in New York City after being expelled from prep school.",
+                cover: "https://images.app.goo.gl/iveHf",
+                bookLink: "https://giove.isti.cnr.it/demo/eread/Libri/sad/Rye.pdf",
+                isFavorite: false
+            },
+            {
+                id: 9,
+                title: "The Hunger Games",
+                author: "Suzanne Collins",
+                genre: "Dystopian",
+                description: "In a dystopian future, teenagers are forced to fight to the death in an annual televised battle called the Hunger Games.",
+                cover: "https://teachingbooks.com/content/ingram_images_hi/3/0439023483.jpg", // Extracted direct link
+                bookLink: "https://mcla7th.weebly.com/uploads/1/4/0/8/14084007/hunger-games-18.pdf",
+                isFavorite: false
+            },
+            {
+                id: 10,
+                title: "Sapiens: A Brief History of Humankind",
+                author: "Yuval Noah Harari",
+                genre: "Non-fiction",
+                description: "A thought-provoking exploration of the history of Homo sapiens, from ancient times to the present day.",
+                cover: "https://images.app.goo.gl/rqNto",
+                bookLink: "https://archive.org/details/sbrief",
+                isFavorite: false
+            },
+            {
+                id: 11,
+                title: "The Alchemist",
+                author: "Paulo Coelho",
+                genre: "Fiction",
+                description: "A fable about following your dreams and listening to your heart, centered around a young Andalusian shepherd named Santiago.",
+                cover: "https://images.app.goo.gl/ihzYK",
+                bookLink: "https://icrrd.com/public/media/15-05-2021-084550The-Alchemist-Paulo-Coelho.pdf",
+                isFavorite: false
+            },
+            {
+                id: 12,
+                title: "The Lord of the Rings",
+                author: "J.R.R. Tolkien",
+                genre: "Fantasy",
+                description: "An epic high-fantasy story of the quest to destroy the One Ring and defeat the Dark Lord Sauron.",
+                cover: "https://images.app.goo.gl/UGmse",
+                bookLink: "https://gosafir.com/mag/wp-content/uploads/2019/12/Tolkien-J.-The-lord-of-the-rings-HarperCollins-ebooks-2010.pdf",
+                isFavorite: false
+            },
+            {
+                id: 13,
+                title: "The Da Vinci Code",
+                author: "Dan Brown",
+                genre: "Mystery",
+                description: "A thrilling mystery that follows symbologist Robert Langdon as he investigates a murder in the Louvre Museum.",
+                cover: "https://images.app.goo.gl/XEkGY",
+                bookLink: "https://files.hostgator.co.in/hostgator253199/file/thedavincicode-danbrown.pdf",
+                isFavorite: false
+            },
+            {
+                id: 14,
+                title: "The Fault in Our Stars",
+                author: "John Green",
+                genre: "Romance",
+                description: "A heart-wrenching love story about two teenagers with cancer who meet at a support group.",
+                cover: "https://images.app.goo.gl/pSC1p",
+                bookLink: "https://spensabayalibrary.files.wordpress.com/2016/04/the-fault-in-our-stars.pdf",
+                isFavorite: false
+            },
+            {
+                id: 15,
+                title: "The Road",
+                author: "Cormac McCarthy",
+                genre: "Dystopian",
+                description: "A father and son's journey through post-apocalyptic America, fighting for survival in a world devoid of civilization.",
+                cover: "https://images.app.goo.gl/WyzNX",
+                bookLink: "https://mrsfieldstchs.weebly.com/uploads/3/7/7/1/37719247/the_road_-_text.pdf",
+                isFavorite: false
+            },
+            {
+                id: 16,
+                title: "Thinking, Fast and Slow",
+                author: "Daniel Kahneman",
+                genre: "Non-fiction",
+                description: "An exploration of the two systems that drive the way we think—System 1 is fast, intuitive, and emotional; System 2 is slower, more deliberative, and more logical.",
+                cover: "h
